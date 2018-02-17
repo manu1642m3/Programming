@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<algorithm>
+#define ll long long
+using namespace std;
+ll dp[1005][1005];
+
+ll A[1005];
+ll sum;
+
+ll calling(ll i,ll j)
+{ ll one,two;
+
+  if(i+1==j)
+   {dp[i][j]= max(A[i],A[j]);return dp[i][j];}
+   
+    if(dp[i][j]!=0)
+     return dp[i][j];
+
+    if(A[i+1]>=A[j])
+     one=A[i]+calling(i+2,j);
+      else
+       
+        one=A[i]+calling(i+1,j-1);
+        
+        if(A[i]>=A[j-1])
+         two=A[j]+calling(i+1,j-1);
+          else
+           
+            two=A[j]+calling(i,j-2);
+            
+            dp[i][j]=max(one,two);
+             return dp[i][j];
+}
+
+
+int main()
+{ll n;
+  for(ll t=1; ;t++)
+   { sum=0;
+       scanf("%lld",&n);
+      if(n==0)
+       break;
+      for(ll i=1;i<=n;i++)
+       {scanf("%lld",&A[i]);sum+=A[i];}
+    
+       for(ll i=1;i<=n;i++)
+        for(ll j=1;j<=n;j++)
+         dp[i][j]=0;
+       
+       calling(1,n);
+       
+       printf("In game %lld, the greedy strategy might lose by as many as %lld points.\n",t,2*dp[1][n]-sum);
+   }
+    return 0;
+}
+

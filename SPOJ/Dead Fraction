@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#define lli long long int
+lli hcf(lli,lli);
+int main()
+{lli power[19] = {1 , 10 , 100 , 1000 , 10000 , 100000 , 1000000 , 10000000 , 100000000 , 1000000000 , 10000000000LL , 100000000000LL , 1000000000000LL , 10000000000000LL , 100000000000000LL , 1000000000000000LL , 10000000000000000LL , 100000000000000000LL , 1000000000000000000LL};
+     while(1)
+      {
+           char ch;
+            scanf("%c%c",&ch,&ch);
+            if(ch!='.')
+             exit(0);
+             
+             lli num=0,number,up,down,numerator,denominator=999999999999999999,hc;
+             int len=0;
+             scanf("%c",&ch);
+              while(ch>=48&&ch<=57)
+               {num=(num<<1)+(num<<3)+ch-48;
+                 scanf("%c",&ch);
+                 len++;
+               }
+               scanf("%c%c%c",&ch,&ch,&ch);
+               number=num;
+               for(int i=1;i<=len;i++)
+                {
+               up=number-num/10;
+               down=power[len]-power[len-i];
+                hc=hcf(up,down);
+                 if(down/hc<denominator)
+                  {numerator=up/hc;denominator=down/hc;}
+                 num=num/10;
+                }
+               printf("%llu/%llu\n",numerator,denominator);
+                
+                
+                
+      }
+      return(0);
+}
+
+lli hcf(lli a,lli b)
+ { lli t;while (b != 0) 
+    {t = b;
+    b = a % b;
+    a = t;
+    }
+    return(a);
+ }

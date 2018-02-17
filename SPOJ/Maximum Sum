@@ -1,0 +1,119 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+#include<algorithm>
+#define ll long long
+
+using namespace std;
+
+struct sexo
+{ll maxi1,maxi2;}; 
+struct sexo A[5000000];
+
+ll ARRAY[200005];
+ll MAX=0,MAXX=0;
+
+ll construct(ll,ll,ll);
+ll update(ll,ll,ll,ll,ll);
+ll query(ll,ll,ll,ll,ll);
+
+int main()
+{ll n,q,a,b;
+ char ch;
+ 
+  cin>>n;
+  
+   for(ll i=1;i<=n;i++)
+    cin>>ARRAY[i];
+    cin>>q;
+    scanf("%c",&ch);
+    
+    construct(1, 1, n);
+  //  cout<<A[6].maxi1<<A[6].maxi2<<"..";
+    
+    for(ll i=1;i<=q;i++)
+     {scanf("%c%llu%llu",&ch,&a,&b);
+     // cout<<ch<<a<<b<<"\n";
+        if(ch=='U')
+         update(1,1,n,a,b);
+          else
+           if(ch=='Q')
+            {query(1,1,n,a,b);
+               cout<<MAX+MAXX<<"\n";
+               MAX=0;
+               MAXX=0;
+            }
+        scanf("%c",&ch);
+     }
+    
+     return 0;
+}
+
+ll construct(ll node, ll start, ll end)
+{
+    if(start==end)
+     {A[node].maxi1=ARRAY[start];
+      A[node].maxi2=0;
+       return 0;
+     }
+      
+      construct(2*node, start, (start+end)/2);
+      construct(1+2*node, 1+(start+end)/2, end);
+       
+       A[node].maxi1=max( A[2*node].maxi1 , A[1+2*node].maxi1 );
+       A[node].maxi2=max( min( A[2*node].maxi1 , A[1+2*node].maxi1 ) , max(A[2*node].maxi2 , A[1+2*node].maxi2) );
+        return 0;
+}
+
+ll update(ll node, ll start, ll end, ll a, ll b)
+{ll temp1,temp2;
+
+  if(end<a)
+   return 0;
+    else
+     if(start>a)
+      return 0;
+       else
+        if(start==end)
+         {A[node].maxi1=b;
+          A[node].maxi2=0;
+           return 0;
+         }
+          else
+           {update(2*node, start, (start+end)/2, a, b);
+            update(1+2*node, 1+(start+end)/2, end, a, b);
+             A[node].maxi1=max( A[2*node].maxi1 , A[1+2*node].maxi1 );
+             A[node].maxi2=max( min( A[2*node].maxi1 , A[1+2*node].maxi1 ) , max(A[2*node].maxi2 , A[1+2*node].maxi2) );
+              return 0;
+           }
+            
+        return 0;
+}
+
+ll query(ll node, ll start, ll end, ll a, ll b)
+{
+    if(end<a)
+     return 0;
+      else
+       if(start>b)
+        return 0;
+         else
+          if(start==end)
+           {MAXX=max( min(MAX, A[node].maxi1), max(MAXX, A[node].maxi2) );
+            MAX=max(A[node].maxi1,MAX);
+          //  cout<<MAX<<" "<<MAXX<<" "<<A[node].maxi1<<" "<<A[node].maxi2<<" "<<start<<" "<<end<<" "<<node<<"\n";
+           }
+            else
+             if(a<=start&&end<=b)
+             {MAXX=max( min(MAX, A[node].maxi1), max(MAXX, A[node].maxi2) );
+              MAX=max(MAX,A[node].maxi1);
+               return 0;
+             }
+              else
+               {query(2*node, start, (start+end)/2, a,b);
+                query(1+2*node, 1+(start+end)/2, end, a, b);
+                 return 0;
+               }
+             
+        return 0;     
+}

@@ -1,0 +1,44 @@
+#include<stdio.h>
+#define ll long long
+
+int main()
+{int t;
+ 
+ while(scanf("%d",&t)!=EOF)
+  {char str[t+1],ch;
+    scanf("%s",&str);
+    
+     int array[t+1],pos=0,i=1,k=0;
+     array[0]=0;
+     
+      while(str[i]!='\0')
+        { while(pos>0&&str[i]!=str[pos])
+           pos=array[pos-1];
+            if(str[i]==str[pos])
+             pos++;
+              
+          array[i]=pos;
+        i++;
+       }
+       
+       i=0;pos=0;
+       scanf("%c",&ch);
+       while((ch = getchar())!=EOF && ch!='\n')
+       {
+         while(pos>0&&str[pos]!=ch)
+          pos=array[pos-1];
+           if(str[pos]==ch)
+            pos++;
+           if(pos==t)
+           {printf("%d\n",i-pos+1);
+               pos=array[t-1];}
+             i++;
+             k=1;
+       }
+        
+        if(k==0) 
+         printf("\n");
+         printf("\n");
+   }
+   return 0;
+}

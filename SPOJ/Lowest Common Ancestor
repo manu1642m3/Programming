@@ -1,0 +1,113 @@
+#include<iostream>
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+#include<math.h>
+#define ll long long
+#define LOG 20
+
+using namespace std;
+
+vector<ll> G[50005];
+ll A[50005];
+ll V[50005];
+ll PAPA[50005];
+ll DEPTH[50005];
+ll PA[50005][40];
+
+void BFS(ll,ll);
+ll LCA(ll,ll);
+
+int main()
+{ll t,n,q,a,b,x,lca;
+  cin>>t;
+
+   for(ll lol=1;lol<=t;lol++)
+    {cin>>n;
+      
+      for(ll i=1;i<=n;i++)
+       {cin>>x;
+         
+         for(ll j=1;j<=x;j++)
+          {cin>>a;
+            G[a].push_back(i);
+            G[i].push_back(a);
+              
+          }
+           
+       }
+        
+     PAPA[1]=1;
+     BFS(1,0);
+    
+     for(ll i=1;i<=n;i++)
+      for(ll j=0; 1 <<j <=n; j++)
+       PA[i][j]=-1;
+           
+        for(ll i=1;i<=n;i++)
+         PA[i][0]=PAPA[i];
+           
+         for(ll j = 1; j <=LOG; j++)
+          for(ll i = 1; i<=n ; i++)
+           if(PA[i][j - 1] != -1)
+            PA[i][j] = PA[PA[i][j - 1]][j - 1];
+    
+     // cout<<PAPA[5]<<".....\n";
+     
+     cout<<"Case "<<lol<<":\n";
+     cin>>q;
+     for(ll i=1;i<=q;i++)
+      {cin>>a>>b;
+        lca=LCA(a,b);
+         cout<<lca<<"\n";
+          
+      }
+         
+         for(ll i=1;i<=n;i++)
+          {V[i]=0;
+            while(G[i].size()!=0)
+             G[i].pop_back();
+          }
+    }
+    
+    return 0;
+}
+
+
+void BFS(ll node , ll height)
+{
+    V[node]=1;
+    DEPTH[node]=height;
+    
+     for(ll i=0;i<G[node].size();i++)
+      { if(V[G[node][i]]==0)
+         {PAPA[G[node][i]]=node;
+          BFS(G[node][i], height+1);}
+      }
+
+}
+
+ll LCA(ll u, ll v)
+{
+	if(DEPTH[u] < DEPTH[v])
+		return LCA(v, u);
+
+	int diff = DEPTH[u] - DEPTH[v];
+
+	for(ll i=0;i<=LOG;i++)
+	 if((diff>>i) & 1)
+	  u=PA[u][i];
+
+	if(u != v)
+	{
+		for(ll i=LOG;i>=0;i--)
+			if(PA[u][i] != PA[v][i])
+			{
+				u = PA[u][i];
+				v = PA[v][i];
+			}
+		u = PA[u][0];
+	}
+
+	return u;
+}

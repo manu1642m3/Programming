@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+#define ll long long
+
+using namespace std;
+
+int main()
+{ 
+
+   ll a1,a2,a3,a4,A1,A2,A3,A4;
+   
+   while(1)
+    { scanf("%llu %llu %llu %llu %llu %llu %llu %llu",&a1,&a2,&a3,&a4,&A1,&A2,&A3,&A4);
+         if(a1==-1)
+          break;
+        
+         ll maxi=0,a;
+          
+           if(a1>A1)
+            {if(a1%A1!=0)
+              a=1+(ll)(a1/A1);
+               else
+                a=a1/A1;
+             
+              if(a>maxi)
+               maxi=a;
+            
+            }
+               
+            
+           if(a2>A2)
+            {if(a2%A2!=0)
+              a=1+(ll)(a2/A2);
+               else
+                a=a2/A2;
+            
+             if(a>maxi)
+              maxi=a;
+              
+            }
+            
+            
+           if(a3>A3)
+            {if(a3%A3!=0)
+              a=1+(ll)(a3/A3);
+               else
+                a=a3/A3;
+            
+                if(a>maxi)
+                 maxi=a;
+            }
+    
+            
+           if(a4>A4)
+            {if(a4%A4!=0)
+              a=1+(ll)(a4/A4);
+               else
+                a=a4/A4;
+             
+               if(a>maxi)
+                maxi=a;
+            
+            }
+             if(a1==0&&a2==0&&a3==0&&a4==0)
+              printf("0 0 0 0\n");
+               else
+                if(maxi==0)
+                 printf("%llu %llu %llu %lli\n",A1-a1,A2-a2,A3-a3,A4-a4);
+                  else
+                   printf("%llu %llu %llu %llu\n",(A1*maxi)-a1,(A2*maxi)-a2,(A3*maxi)-a3,(A4*maxi)-a4);
+    }
+     return 0;
+}

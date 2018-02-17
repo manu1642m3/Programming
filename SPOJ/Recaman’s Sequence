@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<iostream>
+#include<string>
+#include<unordered_set>
+#include<map>
+#define ll long long
+
+
+int main()
+{
+ ll a=0,A[500005];
+
+ std::map<ll,ll> myset ;
+  
+
+   
+   A[0]=0;
+   
+    
+    myset[(A[0])]=1;
+    
+    for(ll i=1;i<=500000;i++)
+     {if(A[i-1]-i>0)
+       { a=A[i-1]-i;
+          std::map<ll,ll>::iterator got;
+           got=myset.find(a);
+        
+           if(got==myset.end())
+            {myset[a]=1;A[i]=a;}
+              else
+               {myset[(A[i-1]+i)]=1;A[i]=A[i-1]+i;}
+       }
+        else
+               {myset[(A[i-1]+i)];A[i]=A[i-1]+i;}
+     }
+     
+     while(1)
+     {
+     std::cin>>a;
+      if(a==-1)
+       break;
+        else 
+         std::cout<<A[a]<<"\n";
+     }
+      return 0;
+}

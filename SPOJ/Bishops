@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{ char str[1050];
+   int l,carry1=0,carry2=0,A[1050];
+  while(scanf("%s",&str)!=EOF)
+   {  carry1=0;
+       l=strlen(str);
+       if(l==1&&str[0]=='1')
+        {printf("1\n");continue;}
+        if(l==1&&str[0]=='0')
+         {printf("0\n");continue;}
+       for(int i=l-1;i>=0;i--)
+        {
+          A[i]=carry1-96+str[i]*2;
+           if(A[i]>9)
+             {A[i]=A[i]%10;
+              carry1=1;
+             }
+             else carry1=0;
+             
+        }
+        
+        A[l-1]=A[l-1]-2;
+        carry2=0;
+        if(A[l-1]<0)
+        {A[l-1]=A[l-1]+10;
+          carry2=1;
+         for(int i=l-2;i>=0;i--)
+          {A[i]=A[i]-carry2;
+           if(A[i]<0)
+             {A[i]=A[i]+10;
+             carry2=1;
+             }
+           else {carry2=0;break;}
+          }
+        }
+         
+         if(carry2==0&&carry1==1)
+          printf("%d",carry1);
+          
+          for(int i=0;i<l;i++)
+           printf("%d",A[i]);
+           
+           printf("\n");
+        
+        
+   }
+   return(0);
+}

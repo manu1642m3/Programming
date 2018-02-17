@@ -1,0 +1,29 @@
+#include<stdio.h>
+int main()
+{long int a,c=0;
+ int t;
+ char ch=' ';
+ scanf("%ld",&t);
+ 
+  while(t>0)
+   {
+     scanf("%ld",&a);
+    
+     switch(ch)
+      {
+       case '+':c=c+a;break;
+       case '-':c=c-a;break;
+       case '*':c=c*a;break;
+       case '/':c=c/a;break;
+       
+       default:c=a;
+      }
+      ch=' ';
+      while(ch==' ')
+       {scanf("%c",&ch);}
+      
+      if(ch=='=')
+       {printf("%ld\n",c);t--;c=0;}
+   }    
+    return(0);
+ }

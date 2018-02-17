@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<algorithm>
+
+int function(int );
+
+using namespace std;
+int visited[10001]={0};
+int max1[10001]={0};
+int max2[10001]={0};
+
+struct bhaukaal
+{ int baccha[10001];
+  int k;
+};
+struct bhaukaal tmp[10001];
+
+int main()
+{int a,b,c1,c2;
+ scanf("%d",&c1);c1=c1-1;c2=c1;
+
+  for(int i=0;i<=c1;i++)
+   { tmp[i].k=0;
+      for(int j=0;j<=c1;j++)
+       { tmp[i].baccha[j]=0;}
+   }     
+
+
+ while(c1--)
+  {scanf("%d%d",&a,&b);
+   tmp[a].baccha[tmp[a].k++]=b;
+   tmp[b].baccha[tmp[b].k++]=a;
+  }
+
+  function(1);
+    a=0;
+    for(int i=1;i<=c2;i++)
+     {if(a<(max1[i]+max2[i])) 
+          a=max1[i]+max2[i];
+     }
+
+  printf("%d\n",a);
+ return(0);
+
+ 
+}
+
+int function(int i)
+ { visited[i]=1;
+    int r1,r2;
+    
+    for(int k=0;tmp[i].baccha[k]>0;k++)
+     { r1=tmp[i].baccha[k];
+        
+         if(visited[r1]==0)
+          {function(tmp[i].baccha[k]);
+             r2=max(max1[r1],max2[r1])+1;
+           
+              if(r2>max2[i])
+              {max1[i]=max2[i];max2[i]=r2;}
+               else
+                if(r2>max1[i])
+                  max1[i]=r2;
+          
+              
+          }
+     }
+ }

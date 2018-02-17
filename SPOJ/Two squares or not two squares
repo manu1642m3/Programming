@@ -1,0 +1,42 @@
+#include"stdio.h"
+int main() 
+{
+    int T,ct;
+    long long N;
+    long long I;
+    scanf("%d",&T);
+    while (T--)
+     {I=2;
+        scanf("%lld",&N);
+        if (N% 4==3)
+        {printf ("No\n");
+        continue;}
+        
+        while (I*I<N)
+         {
+             ct = 0;
+            while (N%I==0) {
+                ct++;
+                N/=I;
+            }
+            if (I%4==3 && ct%2==1) {
+                printf("No\n");
+                ct=-1;
+                break;
+                
+             }   
+             ++I;    }
+           
+        if (ct>=0)
+         printf("Yes\n");
+        
+    }
+}
+
+
+
+
+
+
+
+

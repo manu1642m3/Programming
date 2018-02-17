@@ -1,0 +1,84 @@
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+#define ll long long
+
+using namespace std;
+
+struct node
+{ll count;
+ struct node * link[100];
+    
+} *start;
+
+ll calling(struct node *noddy,char str[100],ll size,ll index);
+ll print(struct node *noddy,char str[1000005],ll size,ll index);
+
+int main()
+{ll n,m;
+ char str[1000005];
+ 
+  cin>>n>>m;
+    
+  start=(struct node*) malloc(sizeof(node));  
+   start->count=0;
+    
+    for(ll i=1;i<=24;i++)
+     start->link[i]=NULL;
+    
+   for(ll i=1;i<=n;i++)
+    {cin>>str;
+      calling(start,str,strlen(str),0);
+        
+    }
+        
+   //     for(ll i=0;i<24;i++)
+     //    cout<<i<<" "<<start->link[0]->link[1]->link[2]->link[i]<<" "<<start->link[0]->link[1]->link[2]->count<<"\n";
+        
+     for(ll i=1;i<=m;i++)
+      {cin>>str;
+        cout<<print(start,str,strlen(str),0)<<"\n";
+      }
+    
+    return 0;
+}
+
+ll calling(struct node *noddy,char str[1000005],ll size,ll index)
+{ 
+ 
+    if(index==size)
+     {noddy->count+=1;
+       return 0;
+     }
+     
+      if(noddy->link[str[index]-97]!=NULL)
+       calling(noddy->link[str[index]-97],str,size,index+1);
+        else
+         {struct node *tmp;
+           tmp=(struct node*) malloc(sizeof(node));
+            tmp->count=0;
+           
+            for(ll i=0;i<=24;i++)
+             tmp->link[i]=NULL;
+           
+            noddy->link[str[index]-97]=tmp;
+            calling(tmp,str,size,index+1);
+         }
+    
+     noddy->count+=1;
+      return 0; 
+}
+
+ll print(struct node *noddy,char str[1000005],ll size,ll index)
+{ 
+   if(index==size)
+    return noddy->count;
+    
+    if(noddy->link[str[index]-97]==NULL)
+     return 0;
+         
+     return print(noddy->link[str[index]-97],str,size,index+1);
+    
+}

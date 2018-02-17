@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<string.h>
+int gcd(int ,int );
+int main()
+{int t;
+ scanf("%d",&t);
+  while(t--)
+   { char str[2000];
+      int a,rem=0,num=0;
+       scanf("%d%s",&a,&str);
+        if(a==0)
+         {puts(str);continue;}
+        for(int i=0;str[i]!='\0';i++)
+         { num=num*10+str[i]-48;
+            if(num>a)
+             num=num%a;
+         }
+        printf("%d\n",gcd(a,num));
+   }
+    return 0;
+}
+
+int gcd(int a,int b)
+{ if(b==0)
+   return a;
+    else return gcd(b,a%b);
+}

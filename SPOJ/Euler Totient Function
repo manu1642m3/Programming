@@ -1,0 +1,24 @@
+#include<stdio.h>
+
+int main()
+{ int t;
+  scanf("%d",&t);
+   while(t--)
+    { int n,count=0,prime,result=1;
+      scanf("%d",&n);
+       
+        for(int i=2;i*i<=n;i++)
+         {prime=1;count=0;
+             if(n%i==0)
+              {while(n%i==0)
+               {n=n/i;count++;prime*=i;}
+               result=result*(prime-prime/i);
+              }
+              
+         }
+          if(n>1)
+           result=result*(n-1);
+           printf("%d\n",result);
+    }
+     return 0;
+}

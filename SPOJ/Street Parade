@@ -1,0 +1,30 @@
+#include<stdio.h>
+#define lli int
+#define MAX 300000
+int main()
+{
+     while(1)
+      { lli t,num,A[MAX]={-2},c=0,a=0;
+          scanf("%d",&t);
+          if(t==0)
+            break;
+         for(lli i=1;i<=t;i++)
+          {scanf("%d",&num);
+            
+            if(num==c+1)
+             {c=num;
+              while(A[a]==c+1)
+               {c=A[a];a--;}
+             }
+              else {a++;
+                    A[a]=num;
+                   }
+          }
+          
+          if(a==0)
+           printf("\nyes");
+             else printf("\nno");
+             printf("\n");
+      }
+      return(0);
+}

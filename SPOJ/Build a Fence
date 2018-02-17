@@ -1,0 +1,12 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{ float l;
+  while(1)
+  {  scanf("%f",&l);
+       if(l==0)
+        exit(0);
+       printf("%.2f\n",l*l/(2*3.1415926));
+   }
+   return(0);
+}

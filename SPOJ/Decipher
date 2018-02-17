@@ -1,0 +1,13 @@
+#include<stdio.h>
+#define ll long long
+
+int main()
+{ll t;
+  scanf("%llu",&t);
+    while(t--)
+     {ll a,b,c;
+       scanf("%llu%llu%llu",&a,&b,&c);
+        printf("%llu\n",(a*a)-2*b);
+     }
+      return 0;
+}

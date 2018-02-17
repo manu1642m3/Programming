@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<algorithm>
+#define ll long long
+using namespace std;
+ll dpf[550][105];
+ll dpp[550][105];
+ll fun[105];
+ll price[105];
+
+ll calling(ll budget,ll noparty)
+{ if(budget<0)
+   return -1*fun[noparty+1];
+   
+   if(noparty==1)
+    {if(budget>=price[1])
+      {dpp[budget][1]=price[1];dpf[budget][1]=fun[1];return fun[1];}
+      else 
+        {dpp[budget][1]=0;dpf[budget][1]=0;return 0;}
+    }
+    
+    if(dpf[budget][noparty]!=0)
+     return dpf[budget][noparty];
+ ll old1=calling(budget,noparty-1);
+ ll old2=calling(budget-price[noparty],noparty-1)+fun[noparty];
+ 
+ if(budget-price[noparty]>0)
+  {if(old1>old2)
+   {dpp[budget][noparty]=dpp[budget][noparty-1];
+       dpf[budget][noparty]=old1;
+   }
+     else
+      if(old1<old2)
+       {dpp[budget][noparty]=dpp[budget-price[noparty]][noparty-1]+price[noparty];
+        dpf[budget][noparty]=old2;   
+       }
+         else
+          {dpp[budget][noparty]=min(dpp[budget][noparty-1],dpp[budget-price[noparty]][noparty-1]+price[noparty]);
+           dpf[budget][noparty]=old1;
+          }
+   }
+    else
+       {if(old1>old2)
+   {dpp[budget][noparty]=dpp[budget][noparty-1];
+       dpf[budget][noparty]=old1;
+   }
+     else
+      if(old1<old2)
+       {dpp[budget][noparty]=price[noparty];
+        dpf[budget][noparty]=old2;   
+       }
+         else
+          {dpp[budget][noparty]=min(dpp[budget][noparty-1],price[noparty]);
+           dpf[budget][noparty]=old1;
+          }
+      }
+       return dpf[budget][noparty];
+}
+
+
+int main()
+{ll budget,noparty;
+  while(1)
+   {scanf("%lld%lld",&budget,&noparty);
+     if(budget==0&&noparty==0)
+      break;
+      
+       for(ll i=0;i<=budget;i++)
+        for(ll j=0;j<=noparty;j++)
+         {dpp[i][j]=0;dpf[i][j]=0;}
+       
+     for(ll i=1;i<=noparty;i++)
+      scanf("%lld%lld",&price[i],&fun[i]);
+      
+      ll g=calling(budget,noparty);
+      
+      printf("%lld %lld\n",dpp[budget][noparty],dpf[budget][noparty]);
+   }
+    return 0;
+}
+

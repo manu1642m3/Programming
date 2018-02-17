@@ -1,0 +1,170 @@
+#include<stdio.h>
+#include<algorithm>
+#include<vector>
+#include<stack>
+#define ll long long 
+
+using namespace std;
+
+struct node
+{ll first,last,area;
+}; struct node AA[1000005];
+
+ll A[1000005];
+
+int main()
+{ll n,a,num,index;
+  
+  vector<ll> *myvector;
+  myvector=new vector<ll>[1000005];
+  
+  vector<ll> indexvector;
+  
+  stack<ll> mystack;
+  
+  while(1)
+   {
+    scanf("%llu",&n);
+     if(n==0)
+      break;
+      
+      for(ll i=1;i<=n;i++)
+       {scanf("%llu",&a);A[i]=a;}
+       
+       mystack.push(1);
+       
+       for(ll i=2;i<=n;i++)
+        {num=mystack.top();
+        
+                                if(A[i]>=A[num])
+                                 mystack.push(i);
+                                  else
+                                   { index=num;
+                                       indexvector.push_back(num);
+                 
+                                       while(A[i]<A[num])
+                                        {myvector[index].push_back(num);
+                                         mystack.pop();
+            
+                                          if(mystack.size()==0)
+                                           break;
+            
+                                         num=mystack.top();
+                                        }
+                                        
+                                        mystack.push(i);
+                                   }
+                                   
+        }
+        
+         if(mystack.size()!=0)
+                   {
+                       num=mystack.top();
+                       index=num;
+                       indexvector.push_back(num);
+        
+                        while(1)
+                         {myvector[index].push_back(num);
+                          mystack.pop();
+                           
+                           if(mystack.size()==0)
+                            break;
+                            
+                            num=mystack.top();
+                         }
+                   }
+        
+        for(ll i=0;i<indexvector.size();i++)
+         { vector<ll> & k=myvector[indexvector[i]];
+         
+             for(ll j=0;j<myvector[indexvector[i]].size();j++)
+             {AA[k[j]].first=k[j];
+              AA[k[j]].last=indexvector[i];
+              AA[k[j]].area=(AA[k[j]].last-AA[k[j]].first+1)*A[k[j]];
+             }
+             
+             while(myvector[indexvector[i]].size()!=0)
+              myvector[indexvector[i]].pop_back();
+         }
+         
+         while(indexvector.size()!=0)
+          indexvector.pop_back();
+         
+     
+     
+       mystack.push(n);
+       
+       for(ll i=n-1;i>=1;i--)
+        {num=mystack.top();
+        
+                                if(A[i]>=A[num])
+                                 mystack.push(i);
+                                  else
+                                   { index=num;
+                                       indexvector.push_back(num);
+                 
+                                       while(A[i]<A[num])
+                                        {myvector[index].push_back(num);
+                                         mystack.pop();
+            
+                                          if(mystack.size()==0)
+                                           break;
+            
+                                         num=mystack.top();
+                                        }
+                                        
+                                        mystack.push(i);
+                                   }
+                                   
+        }
+        
+         if(mystack.size()!=0)
+                   {
+                       num=mystack.top();
+                       index=num;
+                       indexvector.push_back(num);
+        
+                        while(1)
+                         {myvector[index].push_back(num);
+                          mystack.pop();
+                           
+                           if(mystack.size()==0)
+                            break;
+                            
+                            num=mystack.top();
+                         }
+                   }
+        
+        for(ll i=0;i<indexvector.size();i++)
+         { vector<ll> & k=myvector[indexvector[i]];
+         
+             for(ll j=0;j<myvector[indexvector[i]].size();j++)
+             {AA[k[j]].first=k[j];
+              AA[k[j]].last=indexvector[i];
+              AA[k[j]].area+=(AA[k[j]].first-AA[k[j]].last+1)*A[k[j]]-A[k[j]];
+             }
+             
+             while(myvector[indexvector[i]].size()!=0)
+              myvector[indexvector[i]].pop_back();
+         }
+         
+         while(indexvector.size()!=0)
+          indexvector.pop_back();
+     
+     
+     
+         
+         ll maxi=-1;
+         
+         
+          for(ll i=1;i<=n;i++)
+           {maxi=max(maxi,AA[i].area);}
+           
+           while(indexvector.size()!=0)
+            indexvector.pop_back();
+         
+            printf("%llu\n",maxi);
+   }
+       return 0;
+}
+         

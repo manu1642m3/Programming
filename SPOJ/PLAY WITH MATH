@@ -1,0 +1,39 @@
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class hcf
+{
+     long hf(long n1,long n2)
+     {
+    if (n2!=0)
+       return hf(n2, n1%n2);
+    else 
+       return n1;
+     }
+}
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{  hcf ob=new hcf();
+	
+		Scanner in=new Scanner(System.in);
+		
+		  long t;
+		  t=in.nextLong();
+		   while(t>0)
+		    { long a,b; 
+		      a=in.nextLong();
+		      b=in.nextLong();
+		      long h=ob.hf(a,b);
+		       h=(a*b)/h;
+		       t--;
+		       System.out.println(+h/a+" "+h/b);
+		    }
+		
+		
+	}
+}

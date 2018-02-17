@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<algorithm>
+#define ll int 
+
+using namespace std;
+
+ll A[1005][1005];
+
+ll calling(ll h,ll a)
+{ll call1=0,call2=0;
+  h=h+3;
+  a=a+2;
+   if(A[h][a]!=0)
+    return A[h][a];
+   if(h>20&&a>0)
+    {calling(h-20,a+5);
+      call1=A[h-20+3][a+5+2]+2;}
+      
+      if(h>5&&a>10)
+       {calling(h-5,a-10);
+         call2=A[h-5+3][a-10+2]+2;}
+  
+  A[h][a]=max(call1,call2);
+  
+}
+
+int main()
+{ll t;
+  
+  for(ll i=1;i<=1000;i++)
+   for(ll j=1;j<=1000;j++)
+    A[i][j]=0;
+    
+  scanf("%d",&t);
+   while(t--)
+    { 
+        ll h,a;
+       scanf("%d%d",&h,&a);
+       
+        if(A[h+3][a+2]!=0)
+         printf("%d",A[h][a]+1);
+          else
+           {calling(h,a);
+             printf("%d\n",A[h+3][a+2]+1);}
+    }
+     return 0;
+}
+         

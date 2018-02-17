@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{char str1[105],str2[105];
+ 
+ for(int ii=0;ii<10;ii++)
+ {
+  scanf("%s%s",&str1,&str2);
+  
+    int l1,l2,carry=0,A[105]={0},j,k,i,num,B[105]={0};
+    l1=strlen(str1);
+    l2=strlen(str2);
+    
+    for(j=l1-1,k=l2-1;k>=0;j--,k--)
+     {A[j+1]=str1[j]+str2[k]+carry-96;
+       if(A[j+1]>9)
+        {A[j+1]=A[j+1]%10;carry=1;}
+        else carry=0;
+     }
+     while(j>=0)
+      {A[j+1]=str1[j]+carry-48;
+        if(A[j+1]>9)
+         {A[j+1]=A[j+1]%10;carry=1;}
+          else carry=0;
+          j--;
+      }
+      A[0]=carry;carry=0;
+      
+     for(j=0;j<=l1;j++)
+      {num=A[j];A[j]=0;
+          num=num+carry;
+        while(num>=2)
+        { num=num-2;A[j]=A[j]+1;}
+        carry=num*10;
+      }
+      
+      carry=0;
+      for(j=l1,k=l1-1;k>=0;k--,j--)
+       {B[j]=str1[k]-A[j]-carry-48;
+         if(B[j]<0)
+          {B[j]=B[j]+10;carry=1;}
+           else carry=0;
+       }
+        
+        i=0;
+       while(A[i]==0)
+        i++;
+       for(;i<=l1;i++)
+            printf("%d",A[i]);
+        printf("\n");
+          i=0;
+        while(B[i]==0)
+         {if(i>l1) {i=l1; break;} else i++;}
+         
+        for(;i<=l1;i++)
+           printf("%d",B[i]);
+         printf("\n\n");
+ }
+ 
+ return(0);
+}
+      
+      
+      
+      

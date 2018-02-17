@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+
+using namespace std;
+
+int main()
+{ int t,A[110][110][60];
+  scanf("%d",&t);
+   while(t--)     
+    {char str1[110],str2[110];
+     int k;
+      scanf("%s",&str1);
+      scanf("%s",&str2);
+      scanf("%d",&k);
+     
+     int l,m,lala=0;
+     l=strlen(str1);
+     m=strlen(str2);
+    
+     for(int i=0;i<110;i++)
+      {for(int j=0;j<110;j++)
+       {for(int ll=0;ll<60;ll++)
+        {A[i][j][ll]=0;}}}
+        
+        if(str1[0]==str2[0])
+         A[0][0][1]=str2[0];
+        
+      for(int j=1;str2[j]!='\0';j++) 
+       {  if(str1[0]==str2[j])
+           A[0][j][1]=str2[j];
+            else
+             if(A[0][j-1][1]>0)
+              A[0][j][1]=A[0][j-1][1];
+       }
+       
+       for(int i=1;str1[i]!='\0';i++)
+        { if(str1[i]==str2[0])
+           A[i][0][1]=str2[0];
+            else
+             if(A[i-1][0][1]>0)
+              A[i][0][1]=A[i-1][0][1];
+        }
+              
+     
+      for(int i=1;str1[i]!='\0';i++)
+       { for(int j=1;str2[j]!='\0';j++)
+          {  
+               for(int f=1;f<=k;f++)
+                 {
+                    
+                    if(str1[i]==str2[j]&&(f==1||A[i-1][j-1][f-1]>0))
+                      {A[i][j][f]=max(A[i-1][j][f],A[i-1][j-1][f-1]+str2[j]);A[i][j][f]=max(A[i][j][f],A[i][j-1][f]);}
+                       else A[i][j][f]=max(A[i][j-1][f],A[i-1][j][f]);
+                      
+                    
+                 }
+          }
+       }
+        
+         printf("%d\n",A[l-1][m-1][k]);
+    }
+     return(0);
+}

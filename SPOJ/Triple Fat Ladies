@@ -1,0 +1,11 @@
+#include<stdio.h>
+int main()
+{long long t,n;
+ scanf("%lld",&t);
+ while(t--)
+  {scanf("%lld",&n);
+   n=192+(n-1)*250;
+   printf("\n%lld",n);
+  }
+  return(0);
+}

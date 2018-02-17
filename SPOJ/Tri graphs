@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+long long A[1000002][5];
+long long sum[1000002][5];
+int main()
+{long long n;
+  for(long long ll=1; ;ll++)
+  {
+   scanf("%lld",&n);
+    if(n==0)
+     break;
+    for(int i=1;i<=n;i++)
+    for(int j=1;j<=3;j++)
+     scanf("%lld",&A[i][j]);
+     
+   sum[2][1]=A[1][2]+A[2][1];
+   sum[2][2]=A[2][2]+min(min(sum[2][1],A[1][2]),A[1][2]+A[1][3]);
+   sum[2][3]=A[2][3]+min(min(A[1][2],A[1][2]+A[1][3]),sum[2][2]);
+   if(n==2)
+    {printf("%lld. %lld\n",ll,sum[2][2]);continue;}
+   for(int i=3;i<=n;i++)
+    { sum[i][1]=A[i][1]+min(sum[i-1][1],sum[i-1][2]);
+      sum[i][2]=A[i][2]+min(min(min(sum[i-1][1],sum[i-1][2]),sum[i-1][3]),sum[i][1]);
+      sum[i][3]=A[i][3]+min(min(sum[i-1][2],sum[i-1][3]),sum[i][2]);
+    }
+    
+    printf("%lld. %lld\n",ll,sum[n][2]);
+
+  }
+   return 0;
+}

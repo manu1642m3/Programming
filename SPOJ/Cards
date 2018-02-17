@@ -1,0 +1,13 @@
+#include<stdio.h>
+int main()
+{int t;
+ long long sum,n;
+  scanf("%d",&t);
+   while(t--)
+    {scanf("%lld",&n);
+     sum= n*(n+1)+n*(n-1)/2;
+     sum=sum%1000007;
+     printf("%lld\n",sum);
+    }
+    return(0);
+}

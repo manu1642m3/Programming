@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{int ex[40]={0,0,0,0,1,1,1,1,6,2,4,8,1,3,9,7,6,4,6,4,5,5,5,5,6,6,6,6,1,7,9,3,6,8,4,2,1,9,1,9},t,a,l;
+ char num[1000];
+ long long int b;
+scanf("%d",&t);
+
+while(t--)
+ {scanf("%s",&num);
+  scanf("%llu",&b);
+  l=strlen(num);
+  a=num[l-1]-48;
+  
+  if(b==0)
+   {printf("\n1");continue;}
+   
+   b=b%4;
+     
+   a=ex[b+a*4];
+   
+   
+  printf("\n%d",a); 
+  
+ }
+ 
+ return(0);
+}
+   

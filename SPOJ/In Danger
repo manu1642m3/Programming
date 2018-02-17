@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<cmath>
+using namespace std;
+#define ll long long
+int main()
+{ char a,b,c,d;
+   while(1)
+    { scanf("%c%c%c%c",&a,&b,&c,&d);
+      if(a==48&&b==48&&d==48)
+       exit (0);
+       
+       a=a-48;
+       b=b-48;
+       d=d-48;
+       
+       ll n,start,cut,diff;
+        n=b+a*10;
+         while(d--)
+          n=n*10;
+        
+        start=1;
+        cut=2;
+        diff=1;
+        while(n!=1)
+         { if(n%2==0)
+            { if(start==cut)
+               { start+=diff;
+                 cut=start;
+               }
+                else
+                 cut+=2*diff;
+                 n=n/2;
+            }
+             else
+              { if(start==cut)
+                 { start+=diff;
+                   cut=start+2*diff;
+                   n=n/2;
+                 }
+                  else
+                   {cut=start;
+                    n=1+n/2;
+                   }
+              }
+               diff*=2;
+              
+         }
+         scanf("%c",&a);
+          printf("%lld\n",start);
+    }
+ 
+}
+                   

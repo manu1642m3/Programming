@@ -1,0 +1,47 @@
+#include<iostream>
+#include<stdio.h>
+#define ll long long
+
+using namespace std;
+
+ll A[10000005];
+ll S[10000005];
+
+ll calling()
+{for(ll i=0;i<=10000000;i++)
+  {if(i%2==0)
+    A[i]=2;
+     else
+      A[i]=0;
+  }
+  
+  S[1]=0;
+  S[0]=0;
+  
+   for(ll i=3;i<=10000000;i+=2)
+    {
+        for(ll j=1;i*j<=10000000;j++)
+         {if(A[i*j]==0)
+           A[i*j]=i;
+         }
+    }
+    
+    for(ll i=2;i<=10000000;i++)
+     S[i]=S[i-1]+A[i];
+    
+}
+
+int main()
+{ll t,n;
+ calling();
+  cin>>t;
+   
+    while(t--)
+     {cin>>n;
+      cout<<S[n]<<"\n";
+         
+     }
+    
+    return 0;
+    
+}

@@ -1,0 +1,122 @@
+#include<cstdio>
+#include<iostream>
+#include<vector>
+#define ll long long
+
+using namespace std;
+
+vector<int> *AL;
+vector<int> *BL;
+
+int construct(int ,int ,int );
+int update(int ,int ,int ,int ,int ,int );
+int summation(int ,int ,int ,int ,int );
+
+int A[30005];
+int lim[30005];
+int pi[1000005];
+int tree[1000005];
+int ans[200005];
+
+inline int read()
+{
+	int ret = 0;
+	int c = getchar_unlocked();
+ 
+	while(c<'0' || c>'9')
+		c = getchar_unlocked();
+	while(c>='0' && c<='9')
+	{
+		ret = (ret<<3) + (ret<<1) + c - '0';
+		c = getchar_unlocked();
+	}
+        return ret;
+}
+
+
+int main()
+{int n,lum;
+  n=read();
+ for(int i=0;i<n;i++)
+  {lum=read();A[i]=lum;}
+  
+  int x,y;
+  int q;
+  scanf("%d",&q);
+  
+  AL = new vector<int>[n+2];
+  BL = new vector<int>[n+2];
+  
+   for(int i=0;i<q;i++)
+    {x=read();y=read();
+
+     AL[y-1].push_back(x-1);
+     BL[y-1].push_back(i);
+    }
+    
+    construct(1,0,n-1);
+
+    for(int i=0;i<1000000;i++)
+     pi[i]=-1;
+     
+     for(int i=0;i<n;i++)
+      {vector<int>& K=AL[i];
+       vector<int>& J=BL[i];
+       
+       lim[i]=pi[A[i]];
+       pi[A[i]]=i;
+       
+        if(lim[i]!=-1)
+         {update(1,lim[i],lim[i],0,n-1,0);}
+         update(1,i,i,0,n-1,1);
+         
+         
+         for(int j=0;j<K.size();j++)
+          ans[J[j]]=summation(1,K[j],i,0,n-1);
+      }
+      
+      for(ll i=0;i<q;i++)
+       printf("%d\n",ans[i]); 
+       delete []AL;
+       delete []BL;
+         
+     return 0;     
+}
+
+int construct(int node,int a,int b)
+{ if(a==b)
+   {tree[node]=0;
+    return tree[node];}
+    
+    construct(2*node,a,(a+b)/2);
+    construct(1+2*node,1+(a+b)/2,b);
+    
+    tree[node]=0;
+}
+
+int update(int node,int a,int b,int xx,int yy,int value)
+{ if(yy<a||b<xx)
+    return tree[node];
+    
+    if(xx==yy)
+   {tree[node]=value;return tree[node];}
+   
+   
+    
+     int m=update(2*node,a,b,xx,(xx+yy)/2,value);
+     int n=update(1+2*node,a,b,1+(xx+yy)/2,yy,value);
+     tree[node]=m+n;
+     return tree[node];
+}
+
+int summation(int node,int a,int b,int xx,int yy)
+{if(yy<a||b<xx)
+  return 0;
+   
+   if(a<=xx&&yy<=b)
+    return tree[node];
+    
+   int m=summation(2*node,a,b,xx,(xx+yy)/2);
+   int n=summation(1+2*node,a,b,1+(xx+yy)/2,yy);
+    return m+n;
+}

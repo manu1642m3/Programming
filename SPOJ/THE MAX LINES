@@ -1,0 +1,20 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+
+int main(){
+    int T,r;
+    long long s;
+    
+    scanf("%d",&T);
+    
+    for(int tc = 1;tc <= T;++tc){
+        scanf("%d",&r);
+        
+        s = (long long)4 * r * r;
+        printf("Case %d: %lld",tc,s);
+        puts(".25");
+    }
+    
+    return 0;
+}

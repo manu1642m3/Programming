@@ -1,0 +1,102 @@
+#include<stdio.h>
+#define ll long long
+ll construct(ll ,ll ,ll);
+ll update(ll ,ll ,ll ,ll ,ll,long long);
+long long querry(ll ,ll ,ll ,ll ,ll);
+
+struct node
+{ long long array;
+  long long no;
+};
+node *segtree;
+
+int main()
+{ ll t;
+   
+    scanf("%lld",&t);
+    while(t--)
+     {ll a,b;
+       scanf("%lld%lld",&a,&b);
+       segtree=new node[4*a];
+        construct(1,0,a-1);
+         
+         while(b--)
+          {ll n,x,y; 
+           long long value;
+           scanf("%lld",&n);
+            
+            if(n==0)
+             {scanf("%lld%lld%lld",&x,&y,&value);update(1,0,a-1,x-1,y-1,value);}
+              else
+               {scanf("%lld%lld",&x,&y);printf("%lld\n",querry(1,0,a-1,x-1,y-1));}
+          }
+     }
+    return 0;
+}
+
+ll construct(ll node,ll a,ll b)
+{ if(a==b)
+   {segtree[node].no=0;segtree[node].array=0;return 0;}
+   construct(2*node,a,(a+b)/2);
+   construct(2*node+1,1+(a+b)/2,b);
+   segtree[node].no=0;
+   segtree[node].array=0;
+}
+
+ll update(ll node,ll a,ll b,ll x,ll y,long long value)
+{  long long one,two;
+    if(segtree[node].array!=0)
+    {segtree[node].no=segtree[node].no+segtree[node].array*(b-a+1);
+     
+      if(a!=b)
+      {segtree[2*node].array+=segtree[node].array;
+       segtree[1+2*node].array+=segtree[node].array;
+      }
+    }
+
+   segtree[node].array=0;
+
+  if(y<a||b<x)
+   return segtree[node].no;
+
+  if(x<=a&&b<=y)
+   {segtree[node].no=segtree[node].no+(long long)(b-a+1)*value;
+     if(a!=b)
+      {segtree[2*node].array+=value;
+       segtree[2*node+1].array+=value;
+      }
+
+     return segtree[node].no;
+   }
+
+ one=update(2*node,a,(a+b)/2,x,y,value);
+ two=update(2*node+1,1+(a+b)/2,b,x,y,value);
+
+ segtree[node].no=one+two;
+  return(segtree[node].no);
+}
+
+long long querry(ll node,ll a,ll b,ll x,ll y)
+{ long long one,two;
+    if(segtree[node].array!=0)
+   {segtree[node].no+=segtree[node].array*(b-a+1);
+   
+     if(a!=b)
+      {segtree[2*node].array+=segtree[node].array;
+       segtree[1+2*node].array+=segtree[node].array;
+      }
+   }
+
+    segtree[node].array=0;
+
+      if(y<a||b<x)
+       return 0;
+
+   if(x<=a&&b<=y)
+    return(segtree[node].no);
+
+  one=querry(2*node,a,(a+b)/2,x,y);
+  two=querry(1+2*node,1+(a+b)/2,b,x,y);
+
+  return(one+two);
+}

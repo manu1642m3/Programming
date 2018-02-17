@@ -1,0 +1,108 @@
+#include<stdio.h>
+#include<stdlib.h>
+int B[190][190],MAX=1000000,n,m;
+struct node
+{int info;
+ struct node*link;
+}*front=NULL,*rear=NULL;
+
+struct list
+{int xco,yco;
+};struct list A[40000];
+
+void insert(int );
+int del();
+int calling(int ,int );
+
+int main()
+{int t;
+  scanf("%d",&t);
+   while(t--)
+    {int l=0;char num;
+     scanf("%d%d%c",&n,&m,&num);
+     
+      for(int i=0;i<n;i++)
+       {for(int j=0;j<m;j++)
+        {scanf("%c",&num);
+          if(num=='1')
+           {A[l].xco=i;A[l].yco=j;B[i][j]=-1*MAX;l++;}
+            else B[i][j]=MAX;
+            
+        }
+        scanf("%c",&num);
+       }
+
+     for(int i=0;i<l;i++) 
+      calling(A[i].xco,A[i].yco);
+        
+        for(int i=0;i<n;i++)
+         {for(int j=0;j<m;j++)
+          printf("%d ",B[i][j]);
+          printf("\n");
+         }
+      
+     }
+  return 0;
+}
+
+int calling(int x,int y)
+{int dist;
+  insert(x);
+  insert(y);
+  B[x][y]=0;
+
+   while(front!=NULL)
+    {
+       x=del();
+       y=del();
+
+     dist=B[x][y]+1;
+ 
+      if(y-1>=0&&dist<B[x][y-1])
+       {insert(x);
+        insert(y-1);
+        B[x][y-1]=dist;
+       }
+
+      if(y+1<m&&dist<B[x][y+1])
+       {insert(x);
+        insert(y+1);
+        B[x][y+1]=dist;
+       }
+
+      if(x-1>=0&&dist<B[x-1][y])
+       {insert(x-1);
+        insert(y);
+        B[x-1][y]=dist;
+       }
+
+      if(x+1<n&&dist<B[x+1][y])
+       {insert(x+1);
+        insert(y);
+        B[x+1][y]=dist;
+       }
+     }
+}
+
+void insert(int n)
+{ struct node*tmp;
+  tmp=(struct node*)malloc(sizeof (struct node));
+  tmp->info=n;
+  tmp->link=NULL;
+   if(front==NULL)
+    front=tmp;
+     else
+      rear->link=tmp;
+    rear=tmp;
+}
+
+int del()
+{struct node*tmp;
+ int n;
+ tmp=front;
+ n=tmp->info;
+ front=front->link;
+ free(tmp);
+ return n;
+}
+ 

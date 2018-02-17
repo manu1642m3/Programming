@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{ int a,d,D[10000],min,aa;
+
+  while(1)
+   { min=10101;
+       scanf("%d%d",&a,&d);
+     if(a==0&&d==0)
+      exit(0);
+      
+      for(int i=0;i<a;i++)
+       {scanf("%d",&aa);
+        if(aa<min)
+         min=aa;}
+        for(int i=0;i<d;i++)
+         scanf("%d",&D[i]);
+         
+         
+         sort(D,D+d);
+         
+         if(min<D[1])
+          printf("Y\n");
+           else printf("N\n");
+   }
+   return(0);
+}

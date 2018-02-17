@@ -1,0 +1,117 @@
+#include<iostream>
+#include<stdio.h>
+#include<algorithm>
+#include<vector>
+#define ll int
+
+using namespace std;
+
+vector< pair<ll,ll> > A;
+ll h,w,maxi,hmm;
+ll MAP[100][100];
+char str[100][100];
+
+ll bfs(ll,ll,char,ll);
+
+int main()
+{char ch;
+  
+   for(ll lol=1;;lol++)
+    {cin>>h>>w;
+      
+//     cout<<h<<"huh"<<w<<"lol";
+      scanf("%c",&ch);
+      maxi=0;
+      hmm=0;
+      
+       if(h==0)
+        return 0;
+     
+     cout<<"Case "<<lol<<": ";
+        
+        for(ll i=1;i<=h;i++)
+         {
+             for(ll j=1;j<=w;j++)
+              {scanf("%c",&ch);
+                //cout<<ch<<"<>\n";
+                str[i][j]=ch;
+               //  cout<<i<<" "<<j<<" "<<str[i][j]<<"..\n";
+                 if(ch=='A')
+                  A.push_back(make_pair(i,j));
+                  MAP[i][j]=0;
+              }
+               scanf("%c",&ch);
+         }
+          
+        //  cout<<str[1][2]<<"aoo\n";
+          
+         for(ll i=0;i<A.size();i++)
+          {hmm=bfs(A[i].first,A[i].second,'A',1);
+           maxi=max(maxi,hmm);
+          }
+          
+         // cout<<MAP[3][2]<<"..\n";
+          
+           cout<<maxi<<"\n";
+//           cout<<h<<"<><>"<<w<<"\n";
+            while(A.size()!=0)
+             A.pop_back();
+    }
+    
+     return 0;
+    
+}
+
+ll bfs(ll i, ll j, char ch, ll length)
+{ll temp1=0,temp2=0,temp3=0,temp4=0,temp5=0,temp6=0,temp7=0,temp8=0;
+  // cout<<i<<" "<<j<<" "<<ch<<" "<<str[i][j]<<"..\n";
+    
+    if(MAP[i][j]!=0)
+     return MAP[i][j];
+    
+    if(i-1>=1)
+     {if(str[i-1][j]==ch+1)
+       temp1=bfs(i-1,j,ch+1,length+1);
+     }
+      if(i+1<=h)
+       {if(str[i+1][j]==ch+1)
+         temp2=bfs(i+1,j,ch+1,length+1);
+       }
+        if(j-1>=1)
+         {if(str[i][j-1]==ch+1)
+           temp3=bfs(i,j-1,ch+1,length+1);
+         }
+          if(j+1<=w)
+           {if(str[i][j+1]==ch+1)
+             temp4=bfs(i,j+1,ch+1,length+1);
+           }
+            if(i-1>=1&&j-1>=1)
+             {if(str[i-1][j-1]==ch+1)
+               temp5=bfs(i-1,j-1,ch+1,length+1);
+             }
+              if(i-1>=1&&j+1<=w)
+               {if(str[i-1][j+1]==ch+1)
+                 temp6=bfs(i-1,j+1,ch+1,length+1);
+               }
+                if(i+1<=h&&j-1>=1)
+                 {if(str[i+1][j-1]==ch+1)
+                   temp7=bfs(i+1,j-1,ch+1,length+1);
+                 }
+                  if(i+1<=h&&j+1<=w)
+                   {if(str[i+1][j+1]==ch+1)
+                     temp8=bfs(i+1,j+1,ch+1,length+1);
+                   }
+        
+         temp1=max(temp1,temp2);
+         temp1=max(temp1,temp3);
+         temp1=max(temp1,temp4);
+         temp1=max(temp1,temp5);
+         temp1=max(temp1,temp6);
+         temp1=max(temp1,temp7);
+         temp1=max(temp1,temp8);
+          MAP[i][j]=temp1+1;
+          
+         // cout<<i<<" "<<j<<" "<<temp7<<"lol\n";
+          
+         return temp1+1;
+}

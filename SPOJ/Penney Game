@@ -1,0 +1,48 @@
+#include<stdio.h>
+int main()
+{ int t,no;
+  char str[42],sub[4];
+  scanf("%d",&t);
+   while(t--)
+    { int ocr[8];
+      
+     
+      scanf("%d %s",&no,&str);
+      sub[0]=str[0];
+      sub[1]=str[1];
+      
+      
+      
+      for(int i=0;i<8;i++)
+       ocr[i]=0;
+       
+      for(int i=2;str[i]!='\0';i++)
+       { sub[2]=str[i];
+          
+          
+           if(sub[0]=='T'&&sub[1]=='T'&&sub[2]=='T')
+             {ocr[0]=ocr[0]+1;sub[0]=sub[1];sub[1]=sub[2];continue;}
+             if(sub[0]=='T'&&sub[1]=='T'&&sub[2]=='H')
+             {ocr[1]=ocr[1]+1;sub[0]=sub[1];sub[1]=sub[2];continue;}
+             if(sub[0]=='T'&&sub[1]=='H'&&sub[2]=='T')
+             {ocr[2]=ocr[2]+1;sub[0]=sub[1];sub[1]=sub[2];continue;}
+             if(sub[0]=='T'&&sub[1]=='H'&&sub[2]=='H')
+             {ocr[3]=ocr[3]+1;sub[0]=sub[1];sub[1]=sub[2];continue;}
+             if(sub[0]=='H'&&sub[1]=='T'&&sub[2]=='T')
+             {ocr[4]=ocr[4]+1;sub[0]=sub[1];sub[1]=sub[2];continue;}
+             if(sub[0]=='H'&&sub[1]=='T'&&sub[2]=='H')
+             {ocr[5]=ocr[5]+1;sub[0]=sub[1];sub[1]=sub[2];continue;}
+             if(sub[0]=='H'&&sub[1]=='H'&&sub[2]=='T')
+             {ocr[6]=ocr[6]+1;sub[0]=sub[1];sub[1]=sub[2];continue;}
+             if(sub[0]=='H'&&sub[1]=='H'&&sub[2]=='H')
+             {ocr[7]=ocr[7]+1;sub[0]=sub[1];sub[1]=sub[2];continue;}
+          
+       }
+       printf("%d ",no);
+       for(int i=0;i<8;i++)
+        printf("%d ",ocr[i]);
+        printf("\n");
+    }
+        
+        return(0);
+}

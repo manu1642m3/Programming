@@ -1,0 +1,27 @@
+#include<stdio.h>
+int main()
+{long long t,n,c=0;
+ long int b;
+ scanf("%llu",&t);
+ 
+ while(t--)
+ {c=0;
+ scanf("%llu",&n);
+  
+  while(n>0)
+  {n=n/5;
+   b=n*10;
+   b=b%10;
+   b=b/10;
+   n=n-b;
+   c=c+n;
+  }
+  
+ printf("\n%llu",c);
+ 
+ }
+} 
+
+
+
+

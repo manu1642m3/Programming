@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+#include<set>
+#include<map>
+#include<string>
+#include<cstdio>
+
+int main(){
+    int t;
+    for( scanf("%d", &t); t; t--){
+        int count;
+        char dummy;
+        map<string, int> table;
+        map<string, int>::iterator it;
+        char sr[40];
+        for( scanf("%d\n", &count); count; count--){
+            gets(sr);
+            table[(string)sr]+=1;
+            
+        }
+        for( it = table.begin(); it != table.end(); it++){
+            printf("%s %d\n", it->first.c_str(), it->second);
+        }
+        printf("\n");
+    }
+}

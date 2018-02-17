@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+int main()
+{ char str1[10005],str2[10005],ptr[30],ch='a';
+  int occ1[10005],occ2[10005];
+   for(int i=1;i<=26;i++)
+    {ptr[i]=ch;ch++;}
+    
+   while(scanf("%s",&str1)!=EOF)
+    { 
+        scanf("%s",&str2);
+       for(int i=1;i<=26;i++)
+        { occ1[i]=0;occ2[i]=0;}
+        
+        for(int i=0;str1[i]!='\0';i++)
+          occ1[str1[i]-96]++;
+          
+         for(int i=0;str2[i]!='\0';i++)
+          occ2[str2[i]-96]++;
+          
+          for(int i=1;i<=26;i++)
+           { if(occ1[i]>0&&occ2[i]>0)
+              { int num=min(occ1[i],occ2[i]);
+                 while(num--)
+                  printf("%c",ptr[i]);
+              }
+           }
+            printf("\n");
+    }
+     return 0;
+}

@@ -1,0 +1,43 @@
+#include<iostream>
+#include<stdio.h>
+#include<algorithm>
+#define ll long long
+
+using namespace std;
+
+ll A[10000005];
+ll C[20000005];
+ll S[10000005];
+
+int main()
+{ll t,n,ans;
+  cin>>t;
+   
+   while(t--)
+    {cin>>n;
+     ans=0;
+     
+     for(ll i=0;i<=20000000;i++)
+      C[i]=0;
+     
+      for(ll i=1;i<=n;i++)
+       cin>>A[i];
+       
+       S[1]=A[1];
+        for(ll i=2;i<=n;i++)
+         S[i]=A[i]+S[i-1];
+         
+          for(ll i=1;i<=n;i++)
+           C[S[i]+10000000]++;
+        
+           for(ll i=0;i<=20000000;i++)
+            ans+=(C[i]*(C[i]-1))/2;
+        
+            cout<<ans+C[10000000]<<"\n";
+        
+        
+    }
+    
+    return 0;
+    
+}

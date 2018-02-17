@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{long long int n,A[100]={0},i=1;
+ scanf("%lld",&n);
+ 
+ while(n%2==0)
+  n=n/2;
+  
+  if(n==1)
+   printf("\nTAK");
+    else printf("\nNIE");
+  
+  return(0);
+}

@@ -1,0 +1,10 @@
+#include<stdio.h>
+int main()
+{ long long a;
+  scanf("%llu",&a);
+  if(a%10==0)
+   printf("2\n");
+   else
+  printf("1\n%llu",a%10);
+  return(0);
+}

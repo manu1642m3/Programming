@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int main()
+{int t,fiff,biff,i,j,l;
+char s[200];
+
+ while(1)
+  {scanf("%d",&t);
+   if(t==0)
+    exit(0);
+    
+    scanf("%s",&s);
+    l=strlen(s);
+    fiff=t+t+1;biff=-1;i=l+1;j=-1;
+    while(1)
+     {if(i>=l)
+       {fiff=fiff-2;biff=biff+2;j++;i=j;if(j>=t) break; printf("%c",s[i]);}
+       i=i+fiff;
+       if(i<l)
+        printf("%c",s[i]);
+        i=i+biff;
+        if(i<l)
+         printf("%c",s[i]);
+     }
+       printf("\n");  
+  }
+  return(0);
+}

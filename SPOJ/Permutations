@@ -1,0 +1,55 @@
+#include<stdio.h>
+int dp[20][100];
+int calling(int ,int );
+int main()
+{int t;
+ scanf("%d",&t);
+  while(t--)
+  {int n,k;
+   scanf("%d%d",&n,&k);
+    if(n==1)
+     {if(k==0)
+       printf("1\n");
+        else
+         printf("0\n");
+       continue;
+     }
+      
+    for(int i=0;i<=n;i++)
+     for(int j=0;j<=k;j++)
+      dp[i][j]=0;
+      
+      int ll=calling(n,k);
+       printf("%d\n",dp[n][k]);
+  }
+   return 0;
+}
+
+int calling(int n,int k)
+{ int sum=0,SUM=0;
+    if(n==2)
+   {dp[2][0]=1;dp[2][1]=1;
+     int ll=k-n;
+      if(ll<0)
+       ll=0;
+     for(int i=k;i>=ll;i--)
+       sum+=dp[2][i];
+       return sum;
+   }
+   
+   sum=calling(n-1,k);
+    int ll=k-n;
+     if(ll<0)
+      ll=0;
+       for(int i=k;i>=0;i--)
+        { dp[n][i]=sum;
+           if(i-n>=0)
+            sum=sum-dp[n-1][i]+dp[n-1][i-n];
+             else
+              sum=sum-dp[n-1][i];
+               
+               if(i>=ll)
+                SUM+=dp[n][i];
+        }
+         return SUM;
+}

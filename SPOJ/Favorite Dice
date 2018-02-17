@@ -1,0 +1,15 @@
+#include<stdio.h>
+int main()
+{ int t;
+ scanf("%d",&t);
+  while(t--)
+   { float n,ans=0;
+      scanf("%f",&n);
+       for(float i=1;i<=n;i++)
+        ans+=1/i;
+   
+    printf("%.2f\n",ans*n);
+   }
+
+return 0;
+}

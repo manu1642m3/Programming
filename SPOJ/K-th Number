@@ -1,0 +1,116 @@
+#include<iostream>
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+#include<math.h>
+#include<map>
+#include<stdlib.h>
+#define ll long long
+#define allocate (struct segment *)malloc(sizeof(struct segment))
+
+using namespace std;
+
+struct segment
+{
+    struct segment *lchild,*rchild;
+    ll info;
+    
+};
+
+struct segment *root[100005];
+
+ll A[100005];
+ll RM[100005];
+ll maxi;
+struct segment *construct(ll,ll);
+struct segment *update(struct segment *pointer, ll, ll, ll);
+ll query(struct segment *pointer1, struct segment *pointer2, ll, ll, ll);
+map<ll,ll> MAPPY;
+
+int main()
+{ll n,m,a,b,k;
+  cin>>n>>m;
+   
+   for(ll i=1;i<=n;i++)
+    {cin>>A[i];
+     MAPPY[A[i]];
+    }
+   
+   maxi=1;
+   
+    for(map <ll, ll> :: iterator it = MAPPY.begin(); it != MAPPY.end(); it++ )
+	 {MAPPY[it->first] = maxi;
+	  RM[maxi] = it->first;
+	  maxi++;
+	 }
+    
+    root[0]=NULL;    
+    root[0]=construct(1,n);
+    
+     for(ll i=1;i<=n;i++)
+      {root[i]=NULL;
+       root[i]=update(root[i-1],MAPPY[A[i]],1,n);
+      }
+ //    cout<<root[1]->lchild->lchild->rchild->info;
+    
+    for(ll i=1;i<=m;i++)
+     {cin>>a>>b>>k;
+       cout<<RM[ query(root[b], root[a-1], k, 1, n) ]<<"\n";
+     }
+     
+     return 0;
+
+}
+
+struct segment *construct(ll first, ll second)
+{  
+   struct segment *tmp;
+   tmp=allocate;
+   tmp->info=0;
+   
+    if(first==second)
+     {tmp->lchild=NULL;
+      tmp->rchild=NULL;
+     }
+      else
+       {tmp->lchild=construct(first, (first+second)/2);
+        tmp->rchild=construct(1+(first+second)/2, second);
+       }
+       
+       return tmp;
+}
+
+struct segment *update(struct segment *pointer, ll value, ll first, ll second)
+{
+    if(first<=value&&value<=second)
+     {
+        struct segment *tmp;
+        tmp=allocate;
+        tmp->info=pointer->info+1;
+         
+         if(first==second)
+          {tmp->lchild=NULL;
+           tmp->rchild=NULL;
+            return tmp;
+          }
+          
+        tmp->lchild=update(pointer->lchild, value, first, (first+second)/2);
+        tmp->rchild=update(pointer->rchild, value, 1+(first+second)/2, second);
+         return tmp;
+     }
+      else
+       return pointer;
+    
+}
+
+ll query(struct segment *pointer1, struct segment *pointer2, ll k, ll first, ll second)
+{
+    if(first==second)
+     return first;
+   
+    if(pointer1->lchild->info - pointer2->lchild->info >=k )
+     return query(pointer1->lchild, pointer2->lchild, k, first, (first+second)/2);
+     
+      return query(pointer1->rchild, pointer2->rchild, k- (pointer1->lchild->info - pointer2->lchild->info), 1+(first+second)/2, second);
+    
+}

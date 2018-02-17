@@ -1,0 +1,32 @@
+#include<iostream>
+#include<stdio.h>
+#define ll long long
+
+using namespace std;
+ll calling(ll,ll);
+
+int main()
+{ll t,a,b,c,hcf;
+  cin>>t;
+  
+  for(ll i=1;i<=t;i++)
+   {cin>>a>>b>>c;
+     hcf=calling(a,b);
+      cout<<"Case "<<i<<": ";
+      if(c%hcf==0)
+       cout<<"Yes\n";
+        else
+         cout<<"No\n";
+   }
+    
+    
+    return 0;
+    
+}
+
+ll calling(ll a, ll b)
+{
+    if (a == 0)
+        return b;
+    return calling(b%a, a);
+}

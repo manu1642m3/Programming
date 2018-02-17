@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<stdio.h>
+#include<algorithm>
+#include<iostream>
+#include<cstring>
+
+#define ll long long
+
+ll A[25][25];
+ll I[1<<21+1];
+
+
+ll calling(ll ,ll ,ll);
+
+int main()
+{ll t,a,n;
+  scanf("%llu",&t);
+   while(t--)
+    {
+      scanf("%llu",&n);
+     memset(I,-1,sizeof (ll)*(1<<n)); 
+     
+       for(ll i=0;i<n;i++)
+        for(ll j=0;j<n;j++)
+         {scanf("%llu",&a);A[i][j]=a;}
+         
+         ll ans,number;
+    
+          ans=calling(0,0,n);
+          
+          printf("%llu\n",ans);
+    }
+     return 0;
+}
+
+ll calling(ll s, ll index, ll n)
+{ ll count=0;
+
+    if(s==n)
+     return 1;
+    if(I[index]!=-1)
+     return I[index];
+  
+      
+   for(ll i=0;i<n;i++)
+    { if((index & 1<<i)==0 && A[s][i]==1)
+       count=count+calling(s+1,index | 1<<i,n);
+    }
+     I[index]=count;
+     return count;
+}

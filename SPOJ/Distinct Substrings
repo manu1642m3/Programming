@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<string>
+#include<vector>
+#include<map>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int main()
+{ int t;
+   vector<string> v;
+   map<string,int> m;
+   
+   scanf("%d",&t);
+    while(t--)
+     {string s;
+    
+       cin >> s;
+       for(int i = 0; i < s.size();i++)
+        {
+         m[s.substr(i,s.size()-i)] = i;
+         v.push_back(s.substr(i,s.size()-i));
+        }
+     
+     sort(v.begin(),v.end());
+      int cnt=0;
+      int i=0;
+      int j;
+       for(j=0;j<s.size()-1;j++)
+        { int a,b;
+          a=m[v[j]];
+          b=m[v[j+1]];
+           while(s[a]==s[b]&&a<s.size()&&b<s.size())
+            {cnt++;a++;b++;}
+        }
+         cout<<s.size()*(s.size()+1)/2-cnt<<"\n";
+         m.clear();i=0;
+         
+         
+           while(!v.empty())
+            v.pop_back();
+          
+     }
+      return 0;
+}

@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{long long int n,sum,A[900]={-1},t=0;
+
+ scanf("%llu",&sum);
+  
+  while(1)
+  {n=sum;
+   sum=0;
+   while(n!=0)
+    {sum+=(n%10)*(n%10);
+     n=n/10;
+    }
+    t++;
+    if(A[sum]==1)
+     {printf("-1\n");exit(0);}
+     
+    if(sum==1)
+     {printf("%llu\n",t);exit(0);}
+     else
+      A[sum]=1;
+      
+  }
+  return(0);
+}

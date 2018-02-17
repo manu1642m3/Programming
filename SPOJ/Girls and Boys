@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define ll long long
+int main()
+{ll g,b;
+
+  while(1)
+   { scanf("%llu%llu",&g,&b);
+     if(g==-1)
+      exit(0);
+      
+      if(b>g)
+       { g=g+b;
+         b=g-b;
+         g=g-b;
+       }
+       
+       if(g%(b+1)==0)
+        printf("%llu\n",g/(b+1));
+         else printf("%llu\n",1+g/(b+1));
+        
+   }
+   return(0);
+}

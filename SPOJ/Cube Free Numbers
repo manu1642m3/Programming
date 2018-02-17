@@ -1,0 +1,53 @@
+#include<iostream>
+#include<stdio.h>
+#include<algorithm>
+#define ll long long
+
+using namespace std;
+
+bool S[1000005];
+ll P[1000005];
+ll ANS[1000005];
+
+ll calling()
+{ll cube,i,j;
+  
+  for(i=1;i<=1000000;i++)
+   S[i]=true;
+  
+    for(i=2;i<=1000000;i++)
+     {cube=i*i*i;
+       
+       for(j=1;j*cube<=1000000;j++)
+        S[j*cube]=false;
+         
+     }
+      
+      for(i=1,j=0;i<=1000000;i++)
+       if(S[i]==true)
+        P[j++]=i;
+       
+        for(ll i=0;i<j;i++)
+         ANS[P[i]]=i+1;
+          
+}
+
+int main()
+{ll t,n;
+  cin>>t;
+   calling();
+   
+   for(ll i=1;i<=t;i++)
+    {cin>>n;
+     cout<<"Case "<<i<<": ";
+      if(S[n]==false)  
+       cout<<"Not Cube Free\n";
+        else
+         cout<<ANS[n]<<"\n";
+       
+    }
+ 
+    
+    return 0;
+    
+}

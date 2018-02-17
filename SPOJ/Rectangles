@@ -1,0 +1,17 @@
+#include<stdio.h>
+int main()
+{int n,t,j,count=0;
+ scanf("%d",&n);
+ 
+j=1;
+while(j<=n)
+ {
+      for(int i=1;i*i<=j;i++)
+       {if(j%i==0)
+         count++;}
+         j++;
+ }
+ 
+ printf("\n%d",count);
+ return(0);
+}

@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{char ch,str1[100],str2[100],str3[100];
+int t,num1,num2,num3,i;
+scanf("%d",&t);
+ while(t--)
+ {scanf("%s%c%c%s%c%c%s",&str1,&ch,&ch,&str2,&ch,&ch,&str3);
+     num1=0;num2=0;num3=0;
+    printf("\n");
+    if(strstr(str1,"machula"))
+     {for(i=0;str2[i]!='\0';i++)
+       num2=(num2<<1)+(num2<<3)+str2[i]-48;
+        
+      for(i=0;str3[i]!='\0';i++)
+       num3=(num3<<1)+(num3<<3)+str3[i]-48;
+        printf("%d + %s = %s",num3-num2,str2,str3);
+          continue;
+     }
+  
+         
+    if(strstr(str2,"machula"))
+     {for(i=0;str1[i]!='\0';i++)
+       num1=(num1<<1)+(num1<<3)+str1[i]-48; 
+          
+        for(i=0;str3[i]!='\0';i++)
+         num3=(num3<<1)+(num3<<3)+str3[i]-48;
+         printf("%s + %d = %s",str1,num3-num1,str3);
+         continue;
+     }
+       
+          
+    if(strstr(str3,"machula"))
+     {for(i=0;str1[i]!='\0';i++)
+        num1=(num1<<1)+(num1<<3)+str1[i]-48;
+            
+        for(i=0;str2[i]!='\0';i++)
+         num2=(num2<<1)+(num2<<3)+str2[i]-48;
+           printf("%s + %s = %d",str1,str2,num1+num2);
+           continue;
+     }
+ }
+  return(0);
+}

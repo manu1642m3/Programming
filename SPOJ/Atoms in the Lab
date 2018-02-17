@@ -1,0 +1,26 @@
+#include<iostream>
+#include<math.h>
+#define ll long long
+#define ld long double
+
+using namespace std;
+
+int main()
+{ld p,n,k,m,t,num;
+ ll i;
+  cin>>p;
+   while(p--)
+    {
+      cin>>n>>k>>m;
+       if(n>=m)
+        {cout<<"0\n";continue;}
+         
+         t=log(m/n);
+         t=t/log(k);
+		 	  
+         i=t;	      
+	      cout<<i<<"\n";
+   }
+   
+    return 0;
+}

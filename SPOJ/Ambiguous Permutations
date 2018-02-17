@@ -1,0 +1,38 @@
+#include<stdlib.h>
+#include<stdio.h>
+int main()
+{long int t,o,u,a[100000],b[100000];
+ 
+ while(1)
+ {
+ scanf("%ld",&t);
+   if(t==0)
+    exit(0); 
+   
+   for(u=1;u<=t;u++)
+     {scanf("%ld",&a[u]);
+      b[a[u]]=u;
+     }
+      
+   o=1;
+    for(u=1;u<=t;u++)
+     {if(a[u]!=b[u])
+       {o=0;break;}
+     }
+     
+   if(o==0)  
+    printf("\nnot ambiguous");
+     else
+      printf("\nambiguous");
+      
+  } 
+   return(0);
+}       
+
+
+
+
+
+
+
+

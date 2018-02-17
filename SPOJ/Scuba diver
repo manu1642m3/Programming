@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<algorithm>
+#define ll long long
+using namespace std;
+ll dp[1005][30][85];
+ll W[1005];
+ll O[1005];
+ll N[1005];
+
+ll calling(ll b,ll o,ll n)
+{ 
+    if(o<=0)
+   o=0;
+    if(n<=0)    
+     n=0;
+
+    if(b==0&&(o!=0||n!=0))
+     return 999999;
+     
+     if(o==0&&n==0)
+      return 0;
+     if(dp[b][o][n]!=0)
+    return dp[b][o][n];
+    
+    dp[b][o][n]=min(calling(b-1,o,n),calling(b-1,o-O[b],n-N[b])+W[b]);
+     return dp[b][o][n];
+}
+
+
+
+int main()
+{ll t;
+  scanf("%lld",&t);
+   while(t--)
+    { ll o,n;
+       scanf("%lld%lld",&o,&n);
+        ll b;
+         scanf("%lld",&b);
+         
+         for(ll i=0;i<=b;i++)
+          for(ll j=0;j<=o;j++)
+           for(ll k=0;k<=n;k++)
+            dp[i][j][k]=0;
+         
+         for(ll i=1;i<=b;i++)
+          scanf("%lld%lld%lld",&O[i],&N[i],&W[i]);
+          
+          printf("%lld\n",calling(b,o,n));
+    }
+     return 0;
+}
+

@@ -1,0 +1,21 @@
+#include<stdio.h>
+#define lli long long
+int main()
+{int t;
+ lli a,b,s;
+ scanf("%d",&t);
+  while(t--)
+   {scanf("%llu%llu%llu",&a,&b,&s);
+   
+    lli n;
+    n=2*s/(a+b);
+    printf("\n%llu\n",n);
+    lli diff;
+    diff=(b-a)/(n-5);
+    a=a-2*diff;
+    for(int i=1;i<=n;i++)
+     printf("%llu ",a+(i-1)*diff);
+   }
+   return(0);
+}
+    

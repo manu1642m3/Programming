@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<string.h>
+#include<stack>
+#include<stdlib.h>
+using namespace std;
+
+int main()
+{ char ch[2005],pp;int hh=0,lo=0;
+   stack<char> mystack;
+   for(int i=0; ;i++)
+    { hh=0;lo=0;
+        scanf("%s",&ch);
+        if(ch[0]=='-')
+           exit (0);
+           
+        for(int ii=0;ii<strlen(ch);ii++)
+         {  if(mystack.empty())
+             { if(ch[ii]=='}')
+                lo=1;
+             mystack.push(ch[ii]);}
+              else
+               if(ch[ii]==mystack.top())
+                mystack.push(ch[ii]);
+                 else
+                  if(ch[ii]=='{'&&mystack.top()=='}')
+                   mystack.push(ch[ii]);
+                    else
+                     mystack.pop();
+                      
+         }
+      int l1=0,l2=0;    
+         while(!mystack.empty())
+          { if(mystack.top()=='{')
+             l1++;
+              else
+               l2++;
+               mystack.pop();
+          }
+          if(lo==1)
+           { if(l2%2==0)
+              lo=0;
+               else lo=2;
+             printf("%d. %d\n",i+1,lo+(l1/2)+(l2/2));
+           }
+            else printf("%d. %d\n",i+1,(l1/2)+(l2/2));
+    } 
+}

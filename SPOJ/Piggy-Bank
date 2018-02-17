@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+int MAX=9999999;
+int P[100000];
+int W[100000];
+int k[100000];
+int main()
+{int t;
+ scanf("%d",&t);
+  while(t--)
+   { int w,b,a;
+      scanf("%d%d",&w,&b);
+       w=b-w;
+        scanf("%d",&a);
+         for(int i=1;i<=a;i++)
+          scanf("%d%d",&P[i],&W[i]);
+          
+           for(int i=1;i<=w;i++)
+            k[i]=MAX;
+            
+           for(int i=1;i<=w;i++)
+            {for(int j=1;j<=a;j++)
+             { if(i==W[j])
+                {k[i]=min(k[i],P[j]);}
+                 else
+                  {if(i>W[j]&&k[i-W[j]]!=MAX)
+                   k[i]=min(k[i],P[j]+k[i-W[j]]);}
+             }
+          
+            }
+             if(k[w]!=MAX)
+              printf("The minimum amount of money in the piggy-bank is %d.\n",k[w]);
+               else
+                printf("This is impossible.\n");
+   }
+    return 0;
+}

@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<algorithm>
+#include<queue>
+using namespace std;
+int main()
+{int n,m,A[10005],B[10005],elep[10005],elen[10005];
+ queue<int> myqueue;
+ while(1)
+  { 
+    scanf("%d",&n);
+     if(n==0)
+      exit (0);
+       
+      for(long long i=0;i<10005;i++)
+       {elep[i]=0;elen[i]=0;}
+       
+      for(int i=0;i<n;i++)
+       {scanf("%d",&A[i]); if(A[i]>0) elep[A[i]]=1; else elen[-1*A[i]]=1;}
+       
+        scanf("%d",&m);
+        
+         for(int i=0,j=0;i<m;i++)
+          {scanf("%d",&B[i]);
+            if(B[i]>0)
+             { if(elep[B[i]]!=0)
+                myqueue.push(B[i]);
+             }
+              else
+               if(elen[-1*B[i]]!=0)
+                myqueue.push(B[i]);
+          }
+          
+          
+          long long count=0,sum1=0,sum2=0,i=0,j=0;
+          
+          while(!myqueue.empty())
+           { int num=myqueue.front();
+              while(A[i]!=num)
+               {sum1+=A[i];i++;}
+                while(B[j]!=num)
+                 {sum2+=B[j];j++;}
+                 count+=max(sum1,sum2);
+                 myqueue.pop();
+                 sum1=0;sum2=0;
+           }
+            while(i<n)
+             {sum1+=A[i];i++;}
+             while(j<m)
+              {sum2+=B[j];j++;}
+              count+=max(sum1,sum2);
+      printf("%lld\n",count);
+      
+  }
+}
+             

@@ -1,0 +1,62 @@
+#include<iostream>
+#include<stdio.h>
+#include<algorithm>
+
+#define ll long long
+
+using namespace std;
+
+bool P[500005];
+ll PRIME[500005];
+ll ANS[500005];
+
+void calling()
+{ll k=1;
+
+  for(ll i=0;i<=50000;i++)
+   P[i]=true;
+   
+    for(ll i=2;i<=300;i++)
+     {
+         for(ll j=2;j*i<=50000;j++)
+          P[i*j]=false;
+     }
+    
+    for(ll i=2;i<=50000;i++)
+     if(P[i]==true)
+      PRIME[k++]=i;
+    
+    
+}
+
+ll hmmmm(ll number)
+{ll k=1,ans=1,count,num;
+      
+      for(ll j=1;PRIME[j]<=number;j++)
+       {count=1;
+         num=number;
+         
+           while(num>0)
+            {count=count+num/PRIME[j];
+             num=num/PRIME[j];}
+          
+             ans=ans*count;
+             ans=ans%1000000007;
+       }
+       
+        return ans;
+}
+
+int main()
+{calling();
+ ll t,n;
+    
+    cin>>t;
+     while(t--)
+      {cin>>n;
+        cout<<hmmmm(n)<<"\n";
+          
+      }
+    
+    return 0;
+}

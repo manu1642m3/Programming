@@ -1,0 +1,125 @@
+#include<stdio.h>
+#define ll long long
+ll calling0(ll ,ll ,ll );
+ll calling1(ll ,ll ,ll );
+ll calling2(ll ,ll ,ll );
+ll calling3(ll ,ll ,ll );
+ll calling4(ll ,ll ,ll );
+ll calling5(ll ,ll ,ll );
+
+long long dp[3000][3000];
+int main()
+{long long t;
+  scanf("%lld",&t);
+   for(ll ii=1;ii<=t;ii++)
+    { ll n;
+     scanf("%lld",&n);
+      for(ll i=0;i<=n;i++)
+       for(ll j=0;j<=7;j++)
+        dp[i][j]=0;
+         
+         if(n==0)
+          printf("%lld 1\n",ii);
+           else
+            printf("%lld %lld\n",ii,calling0(n,0,0));
+         
+    }
+     return 0;
+}
+
+ll calling0(ll n,ll h,ll cases)
+{ 
+    
+    if(h==n)
+     return 1;
+    
+     if(h>n)
+      return 0;
+      
+if(dp[h][cases]!=0)
+   return dp[h][cases];
+      
+    dp[h][cases]=calling1(n,h+2,1)+calling2(n,h+1,2)+calling3(n,h+2,3)+calling4(n,h+2,4)+calling5(n,h+2,5);
+     return dp[h][cases];
+    
+}
+
+ll calling1(ll n,ll h,ll cases)
+{ 
+     
+     if(h==n)
+      return 1;
+      
+    if(h>n)
+     return  0;
+  
+  if(dp[h][cases]!=0)
+   return dp[h][cases];
+     
+     dp[h][cases]=calling0(n,h,0);
+      return dp[h][cases];
+}
+
+ll calling2(ll n,ll h,ll cases)
+{ 
+     
+     if(h==n)
+      return 1;
+    
+    if(h>n)
+     return 0;
+      if(dp[h][cases]!=0)
+   return dp[h][cases];
+      dp[h][cases]=calling0(n,h,0);
+       return dp[h][cases];    
+    
+}
+
+ll calling3(ll n,ll h,ll cases)
+{ 
+    if(h==n)
+     return 1;
+    
+    if(h>n)
+     return 0;
+  
+  if(dp[h][cases]!=0)
+   return dp[h][cases];
+     
+     dp[h][cases]=calling0(n,h,0)+calling3(n,h+2,3);
+      return dp[h][cases]; 
+    
+}
+    
+ll calling4(ll n,ll h,ll cases)
+{ 
+    if(h==n)
+     return 1;
+
+    if(h>n)
+     return 0;
+     
+     if(dp[h][cases]!=0)
+   return dp[h][cases];
+     
+     dp[h][cases]=calling0(n,h,0)+calling5(n,h+1,5);
+      return dp[h][cases];
+    
+}
+
+ll calling5(ll n,ll h,ll cases)
+{ 
+    
+    if(h==n)
+     return 1;
+    
+    if(h>n)
+     return 0;
+  
+  if(dp[h][cases]!=0)
+   return dp[h][cases];
+     
+     dp[h][cases]=calling0(n,h,0)+calling4(n,h+1,4);
+      return dp[h][cases];
+    
+}

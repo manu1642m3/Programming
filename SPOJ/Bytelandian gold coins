@@ -1,0 +1,22 @@
+#include<stdio.h>
+#define ll long long
+ll byte(ll n, int i,int j);
+ll arr[32][22];
+int main()
+{  ll n;
+    int i=0,j=0;
+    while(scanf("%llu",&n)!=EOF)
+    {
+        for (i=0;i<32;i++)
+            for(j=0;j<22;j++) arr[i][j]=0;
+        printf("%llu\n",byte(n,0,0));
+    }
+}
+ll byte(ll n ,int i,int j)
+{
+    if (n<12) return n;
+    if (arr[i][j]==0) {
+        arr[i][j]=byte(n/2,i+1,j)+byte(n/3,i,j+1)+byte(n/4,i+2,j);
+    }
+    return arr[i][j];
+}
